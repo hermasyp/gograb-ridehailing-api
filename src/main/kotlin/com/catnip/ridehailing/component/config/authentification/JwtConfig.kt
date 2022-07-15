@@ -1,6 +1,6 @@
 package com.catnip.ridehailing.component.config.authentification
 
-import com.catnip.ridehailing.entity.user.User
+import com.catnip.ridehailing.model.entity.user.User
 import com.catnip.ridehailing.utils.constants.ApiConstants
 import com.catnip.ridehailing.utils.constants.CommonConstants
 import com.catnip.ridehailing.utils.constants.SystemEnv

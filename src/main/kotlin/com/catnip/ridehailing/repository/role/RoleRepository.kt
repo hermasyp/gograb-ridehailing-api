@@ -1,7 +1,7 @@
 package com.catnip.ridehailing.repository.role
 
 import com.catnip.ridehailing.component.db.DatabaseComponent
-import com.catnip.ridehailing.entity.role.Role
+import com.catnip.ridehailing.model.entity.role.Role
 import com.catnip.ridehailing.utils.ext.toResult
 import org.bson.types.ObjectId
 import org.litote.kmongo.eq

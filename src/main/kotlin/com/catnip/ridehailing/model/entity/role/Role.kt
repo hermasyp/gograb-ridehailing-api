@@ -1,4 +1,4 @@
-package com.catnip.ridehailing.entity.role
+package com.catnip.ridehailing.model.entity.role
 
 import org.litote.kmongo.Id
 import org.litote.kmongo.newId

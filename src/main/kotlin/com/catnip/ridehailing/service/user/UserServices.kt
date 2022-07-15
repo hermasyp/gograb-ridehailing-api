@@ -2,10 +2,13 @@ package com.catnip.ridehailing.service.user
 
 import com.catnip.ridehailing.component.config.authentification.JwtConfig
 import com.catnip.ridehailing.component.config.exception.AppException
-import com.catnip.ridehailing.entity.login.LoginRequest
-import com.catnip.ridehailing.entity.login.LoginResponse
-import com.catnip.ridehailing.entity.user.User
+import com.catnip.ridehailing.model.dto.login.LoginRequest
+import com.catnip.ridehailing.model.dto.login.LoginResponse
+import com.catnip.ridehailing.model.dto.user.UserResponse
+import com.catnip.ridehailing.model.entity.user.User
+import com.catnip.ridehailing.model.mapper.toDto
 import com.catnip.ridehailing.repository.user.UserRepository
+import com.catnip.ridehailing.utils.ext.toResult
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -16,9 +19,9 @@ class UserServiceImpl(@Autowired private val userRepository: UserRepository) : U
         return user.map {
             val token = JwtConfig.generateToken(it)
             val userPassword = it.password
-            if(userPassword == request.password){
-                LoginResponse(it,token)
-            }else{
+            if (userPassword == request.password) {
+                LoginResponse(it.toDto(), token)
+            } else {
                 throw AppException("Wrong username or Password")
             }
         }
@@ -26,23 +29,23 @@ class UserServiceImpl(@Autowired private val userRepository: UserRepository) : U
 
     override fun register(user: User): Result<Boolean> {
         val isUsernameExist = userRepository.getUserByUsername(user.username).getOrNull() != null
-        if(isUsernameExist){
+        if (isUsernameExist) {
             throw AppException("Username already Exist !")
-        }else{
+        } else {
             return userRepository.createUser(user)
         }
     }
 
-    override fun updateUser(userId: String, user: User): Result<User> {
-        return userRepository.updateUser(userId, user)
+    override fun updateUser(userId: String, user: User): Result<UserResponse> {
+        return userRepository.updateUser(userId, user).map { it.toDto() }
     }
 
-    override fun getUserByUserId(id: String): Result<User> {
-        return userRepository.getUserById(id)
+    override fun getUserByUserId(id: String): Result<UserResponse> {
+        return userRepository.getUserById(id).map { it.toDto()}
     }
 
-    override fun getUserByUsername(username: String): Result<User> {
-        return userRepository.getUserByUsername(username)
+    override fun getUserByUsername(username: String): Result<UserResponse> {
+        return userRepository.getUserByUsername(username).map { it.toDto() }
     }
 
 }
@@ -50,7 +53,7 @@ class UserServiceImpl(@Autowired private val userRepository: UserRepository) : U
 interface UserServices {
     fun login(userLogin: LoginRequest): Result<LoginResponse>
     fun register(user: User): Result<Boolean>
-    fun updateUser(userId : String,user: User): Result<User>
-    fun getUserByUserId(id: String): Result<User>
-    fun getUserByUsername(username: String): Result<User>
+    fun updateUser(userId: String, user: User): Result<UserResponse>
+    fun getUserByUserId(id: String): Result<UserResponse>
+    fun getUserByUsername(username: String): Result<UserResponse>
 }

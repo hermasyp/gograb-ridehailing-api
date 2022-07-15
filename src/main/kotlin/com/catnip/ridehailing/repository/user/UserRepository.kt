@@ -1,7 +1,7 @@
 package com.catnip.ridehailing.repository.user
 
 import com.catnip.ridehailing.component.db.DatabaseComponent
-import com.catnip.ridehailing.entity.user.User
+import com.catnip.ridehailing.model.entity.user.User
 import com.catnip.ridehailing.component.config.exception.AppException
 import com.catnip.ridehailing.utils.ext.toResult
 import org.bson.types.ObjectId

@@ -1,6 +1,6 @@
-package com.catnip.ridehailing.entity.user
+package com.catnip.ridehailing.model.entity.user
 
-import com.catnip.ridehailing.entity.role.Role
+import com.catnip.ridehailing.model.entity.role.Role
 import org.litote.kmongo.Id
 import org.litote.kmongo.newId
 

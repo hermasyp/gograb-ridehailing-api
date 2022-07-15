@@ -1,7 +1,7 @@
 package com.catnip.ridehailing.component.db
 
-import com.catnip.ridehailing.entity.role.Role
-import com.catnip.ridehailing.entity.user.User
+import com.catnip.ridehailing.model.entity.role.Role
+import com.catnip.ridehailing.model.entity.user.User
 import com.catnip.ridehailing.utils.constants.SystemEnv
 import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoCollection

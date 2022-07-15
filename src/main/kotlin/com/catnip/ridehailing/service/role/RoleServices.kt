@@ -1,6 +1,6 @@
 package com.catnip.ridehailing.service.role
 
-import com.catnip.ridehailing.entity.role.Role
+import com.catnip.ridehailing.model.entity.role.Role
 import com.catnip.ridehailing.repository.role.RoleRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

@@ -1,7 +1,7 @@
 package com.catnip.ridehailing
 
-import com.catnip.ridehailing.entity.role.Role
-import com.catnip.ridehailing.entity.user.User
+import com.catnip.ridehailing.model.entity.role.Role
+import com.catnip.ridehailing.model.entity.user.User
 import com.catnip.ridehailing.repository.role.RoleRepository
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.SignatureAlgorithm

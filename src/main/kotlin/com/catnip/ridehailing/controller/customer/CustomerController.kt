@@ -1,11 +1,12 @@
 package com.catnip.ridehailing.controller.customer
 
 import com.catnip.ridehailing.component.config.exception.AppException
-import com.catnip.ridehailing.entity.login.LoginRequest
-import com.catnip.ridehailing.entity.login.LoginResponse
-import com.catnip.ridehailing.entity.login.RegisterRequest
-import com.catnip.ridehailing.entity.login.mapToUser
-import com.catnip.ridehailing.entity.user.User
+import com.catnip.ridehailing.model.dto.login.LoginRequest
+import com.catnip.ridehailing.model.dto.login.LoginResponse
+import com.catnip.ridehailing.model.dto.register.RegisterRequest
+import com.catnip.ridehailing.model.dto.register.mapToUser
+import com.catnip.ridehailing.model.dto.user.UserResponse
+import com.catnip.ridehailing.model.entity.user.User
 import com.catnip.ridehailing.service.role.RoleServices
 import com.catnip.ridehailing.service.user.UserServices
 import com.catnip.ridehailing.utils.constants.ApiConstants
@@ -26,7 +27,7 @@ class CustomerController {
     private lateinit var roleServices: RoleServices
 
     @GetMapping
-    fun getUser(): BaseResponse<User> {
+    fun getUser(): BaseResponse<UserResponse> {
         val userId = SecurityContextHolder.getContext().authentication.principal as? String
         return userServices.getUserByUserId(userId.orEmpty()).toResponses()
     }
