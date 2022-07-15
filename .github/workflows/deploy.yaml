@@ -9,27 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v3
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          distribution: 'temurin'
-          java-version: '11'
-      - name: Create heroku config file
-        run: |
-          cat >~/.netrc <<EOF
-          machine api.heroku.com
-              login ${{secrets.HEROKU_EMAIL}}
-              password ${{secrets.HEROKU_API_KEY}}
-          machine git.heroku.com
-              login ${{secrets.HEROKU_EMAIL}}
-              password ${{secrets.HEROKU_API_KEY}}
-          EOF
-      - name: Add heroku remote
-        run: heroku git:remote --app=${{secrets.HEROKU_APP_NAME}}
-      - name: Setup heroku env
-        run: |
-          heroku config:set DATABASE_URL=${{secrets.DATABASE_URL}}
-          heroku config:set SECRET=${{secrets.SECRET}}
-      - name: push heroku to main
-        run: |
-          git fetch --unshallow origin
-          git push heroku main
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+        env:
+          DATABASE_URL: ${{secrets.DATABASE_URL}}
+          SECRET: ${{secrets.SECRET}}
