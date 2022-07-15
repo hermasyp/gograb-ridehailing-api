@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserServiceImpl(@Autowired private val userRepository: UserRepository) : UserServices {
-    override fun login(request: LoginRequest): Result<LoginResponse> {
-        val user = userRepository.getUserByUsername(request.username)
+    override fun login(loginRequest: LoginRequest): Result<LoginResponse> {
+        val user = userRepository.getUserByUsername(loginRequest.username)
         return user.map {
             val token = JwtConfig.generateToken(it)
             val userPassword = it.password
-            if (userPassword == request.password) {
+            if (userPassword == loginRequest.password) {
                 LoginResponse(it.toDto(), token)
             } else {
                 throw AppException("Wrong username or Password")
@@ -51,7 +51,7 @@ class UserServiceImpl(@Autowired private val userRepository: UserRepository) : U
 }
 
 interface UserServices {
-    fun login(userLogin: LoginRequest): Result<LoginResponse>
+    fun login(loginRequest: LoginRequest): Result<LoginResponse>
     fun register(user: User): Result<Boolean>
     fun updateUser(userId: String, user: User): Result<UserResponse>
     fun getUserByUserId(id: String): Result<UserResponse>
