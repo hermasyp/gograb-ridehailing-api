@@ -15,5 +15,5 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
         env:
-          DATABASE_URL: ${{secrets.DATABASE_URL}}
-          SECRET: ${{secrets.SECRET}}
+          HD_DATABASE_URL: ${{secrets.DATABASE_URL}}
+          HD_SECRET: ${{secrets.SECRET}}
