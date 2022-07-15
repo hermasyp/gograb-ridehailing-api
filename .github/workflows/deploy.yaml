@@ -2,7 +2,7 @@ name: Heroku deployment
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -29,7 +29,7 @@ jobs:
         run: |
           heroku config:set DATABASE_URL=${{secrets.DATABASE_URL}}
           heroku config:set SECRET=${{secrets.SECRET}}
-      - name: push heroku to master
+      - name: push heroku to main
         run: |
           git fetch --unshallow origin
-          git push heroku master
+          git push heroku main
